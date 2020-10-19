@@ -1,0 +1,43 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+#main-container {
+    background-color: rgb(27, 27, 27);
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 33% 67%;
+    grid-template-rows: 25% 75%;
+    padding: 25px;
+}
+
+#img-container {
+    display: flex;
+    justify-content: center;
+    border: blue dotted 2px;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    padding: 30px;
+}
+
+#img-container img {
+    width: 50%;
+    max-height: 100%;
+}
+
+#title-container {
+    border: blueviolet dotted 2px;
+}
+
+#form-container {
+    border: chartreuse dotted 2px;
+}
+
+#table-container {
+    border: coral dotted 2px;
+}
