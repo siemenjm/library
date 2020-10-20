@@ -15,13 +15,33 @@
       </div>
       <div id="form-container">
         <P id="button-description">You have no books on your bookshelf. Click the button below to add one!</P>
-        
+        <form id="book-form">
+          <fieldset>
+            <legend>Book Information: </legend>
+            <label>Title: </label><br>
+            <input type="text" name="title" placeholder="Enter title..."><br>
+            <label>Author: </label><br>
+            <input type="text" name="author" placeholder="Enter author..."><br>
+            <label>Genre: </label><br>
+            <input type="text" name="genre" placeholder="Enter genre..."><br>
+            <label>Total Pages: </label><br>
+            <input type="number" name="pages" placeholder="Enter pages..."><br>
+            <lable>Have you read this book?</lable><br>
+            <select>
+              <option value="no">No</option>
+              <option value="reading">Currently reading</option>
+              <option value="yes">Yes</option>
+            </select><br>
+            <input type="submit" value="Add Book to Bookshelf">
+          </fieldset>
+        </form>
       </div>
       <div id="table-container">
         <table id="book-table">
           <tr>
             <th>Title</th>
             <th>Author</th>
+            <th>Genre</th>
             <th>Pages</th>
             <th>Have Read?</th>
             <th>Personal Rating</th>
