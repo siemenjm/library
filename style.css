@@ -44,3 +44,12 @@ body {
     border: coral dotted 2px;
     color: white;
 }
+
+table {
+    border: orange solid 5px;
+    width: 100%;
+}
+
+tr {
+    text-align: center;
+}
