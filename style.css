@@ -53,7 +53,7 @@ body {
 fieldset {
     border: none;
 }
-label, input, select, option {
+label, input, select, option, button {
     width: 90%;
     margin: 10px;
     font-size: 20px;

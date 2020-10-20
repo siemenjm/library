@@ -3,12 +3,13 @@
 
 let myLibrary = [];
 const table = document.querySelector("#book-table");
-//const addBtn = document.querySelector("#add-btn");
+const submissionForm = document.querySelector("book-form");
+const submitButton = document.querySelector("#submit-btn");
 
 //Event Listeners---------------------------------------------------
 //------------------------------------------------------------------
 
-//addBtn.addEventListener("click", function() {update()});
+submitButton.addEventListener("click", function() {update(submissionForm)});
 
 //Book Constructor--------------------------------------------------
 //------------------------------------------------------------------
@@ -52,11 +53,8 @@ function displayBooks(libraryArray) {
 //Main Function-----------------------------------------------------
 //------------------------------------------------------------------
 
-function update() {
-    addBookToLibrary("The Silmarillion","J.R.R. Tolkien", "Fantasy", 197, "have read", 5);
-    addBookToLibrary("Harry Potter","J.K. Rowling", "Children's Fantasy", 528, "have read", 4);
-    addBookToLibrary("Harry Potter 2","J.K. Rowling", "Children's Fantasy",423, "have not read");
-    addBookToLibrary("Harry Potter 3","J.K. Rowling", "Children's Fantasy",65, "have not read");
+function update(form) {
+    addBookToLibrary(form.elements[0].value,form.elements[1].value, form.elements[2].value, form.elements[3].value, form.elements[4].value, form.elements[5].value);
 
     displayBooks(myLibrary);
 }
