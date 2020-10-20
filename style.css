@@ -32,10 +32,12 @@ body {
 
 #title-container {
     border: blueviolet dotted 2px;
+    color: white;
 }
 
 #form-container {
     border: chartreuse dotted 2px;
+    color: white;
 }
 
 #table-container {
