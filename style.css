@@ -36,8 +36,27 @@ body {
 }
 
 #form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
     border: chartreuse dotted 2px;
     color: white;
+}
+#form-description {
+    width: 75%;
+}
+#book-form {
+    width: 75%;
+}
+
+fieldset {
+    border: none;
+}
+label, input, select, option {
+    width: 90%;
+    margin: 10px;
+    font-size: 20px;
 }
 
 #table-container {
