@@ -54,9 +54,9 @@ function displayBooks(libraryArray) {
         row.insertCell(1).textContent = book.author;
         row.insertCell(2).textContent = book.genre;
         row.insertCell(3).textContent = book.pages;
-        row.insertCell(4).textContent = book.read;
+        row.insertCell(4).setAttribute("class", "read-column");
         row.insertCell(5).textContent = book.rating;
-        row.insertCell(6).setAttribute("class", "last-column");   
+        row.insertCell(6).setAttribute("class", "last-column");
     });
 }
 
@@ -90,8 +90,24 @@ function createRemovalButtons() {
 function removeBook(buttonRowId) {
     myLibrary.splice(buttonRowId - 1, 1);
     displayBooks(myLibrary);
+    createReadToggles();
     createRemovalButtons();
     console.table(myLibrary);
+}
+
+function createReadToggles() {
+    let readToggle = document.createElement("input");
+    readToggle.type = "checkbox";
+    readToggle.name = "read";
+    readToggle.className = "read-toggle";
+    readToggle.value = "Read";
+    cell.appendChild(readToggle);
+
+    let readLabel = document.createElement("label");
+    readLabel.for = "read";
+    readLabel.textContent = "Read";
+    cell.appendChild(readLabel);
+    
 }
 
 //Main Function-----------------------------------------------------
@@ -100,6 +116,7 @@ function removeBook(buttonRowId) {
 function update() {
     addBookToLibrary(bookTitle.value,bookAuthor.value, bookGenre.value, bookPages.value, bookRead.value, bookRating.value);
     displayBooks(myLibrary);
+    createReadToggles();
     createRemovalButtons();
     resetForm();
 }
