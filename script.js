@@ -9,7 +9,7 @@ let bookPages = document.querySelector("#pages-id");
 let bookRead = document.querySelector("#read-id");
 let bookRating = document.querySelector("#rating-id");
 
-const table = document.querySelector("#book-table");
+const tableContainer = document.querySelector("#table-container");
 const submitButton = document.querySelector("#submit-button");
 
 //Event Listeners---------------------------------------------------
@@ -44,20 +44,22 @@ function addBookToLibrary(title, author, genre, pages, read, rating = "N/A") {
 }
 
 function displayBooks(libraryArray) {
-    while (table.rows.length > 1) {
-        table.deleteRow(-1);
+    let table = document.createElement("table");
+    let tableColumns = 7;
+
+    for (i = 0; i <= libraryArray.length; i++) {
+        let row = document.createElement("tr");
+
+        for (j = 0; j <= tableColumns; j++) {
+            let cell = document.createElement("td");
+            cell.setAttribute("id", i+", "+j);
+            row.appendChild(cell);
+        }
+
+        table.appendChild(row);
     }
-    libraryArray.forEach(book => {
-        let row = table.insertRow(-1);
-        row.setAttribute("id", table.rows.length - 1);
-        row.insertCell(0).textContent = book.title;
-        row.insertCell(1).textContent = book.author;
-        row.insertCell(2).textContent = book.genre;
-        row.insertCell(3).textContent = book.pages;
-        row.insertCell(4).setAttribute("class", "read-column");
-        row.insertCell(5).textContent = book.rating;
-        row.insertCell(6).setAttribute("class", "last-column");
-    });
+
+    tableContainer.appendChild(table);
 }
 
 function resetForm() {
