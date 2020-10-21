@@ -2,19 +2,33 @@
 //------------------------------------------------------------------
 
 let myLibrary = [];
+let bookTitle = document.querySelector("#title-id");
+let bookAuthor = document.querySelector("#author-id");
+let bookGenre = document.querySelector("#genre-id");
+let bookPages = document.querySelector("#pages-id");
+let bookRead = document.querySelector("#read-id");
+let bookRating = document.querySelector("#rating-id");
+
 const table = document.querySelector("#book-table");
-const submissionForm = document.querySelector("book-form");
-const submitButton = document.querySelector("#submit-btn");
+const submitButton = document.querySelector("#submit-button");
 
 //Event Listeners---------------------------------------------------
 //------------------------------------------------------------------
 
-submitButton.addEventListener("click", function() {update(submissionForm)});
+submitButton.addEventListener("click", function() {
+    console.log(bookTitle.value);
+    console.log(bookAuthor.value);
+    console.log(bookGenre.value);
+    console.log(bookPages.value);
+    console.log(bookRead.value);
+    console.log(bookRating.value);
+    update();
+});
 
 //Book Constructor--------------------------------------------------
 //------------------------------------------------------------------
 
-function Book(title, author, genre, pages, read, rating = "N/A") {
+function Book(title, author, genre, pages, read, rating) {
     this.title = title;
     this.author = author;
     this.genre = genre;
@@ -29,7 +43,7 @@ function Book(title, author, genre, pages, read, rating = "N/A") {
 //Helper Functions--------------------------------------------------
 //------------------------------------------------------------------
 
-function addBookToLibrary(title, author, genre, pages, read, rating) {
+function addBookToLibrary(title, author, genre, pages, read, rating = "N/A") {
     let book = new Book(title, author, genre, pages, read, rating);
     
     myLibrary.push(book);
@@ -45,16 +59,25 @@ function displayBooks(libraryArray) {
         row.insertCell(1).textContent = book.author;
         row.insertCell(2).textContent = book.genre;
         row.insertCell(3).textContent = book.pages;
-        row.insertCell(5).textContent = book.read;
-        row.insertCell(4).textContent = book.rating;
+        row.insertCell(4).textContent = book.read;
+        row.insertCell(5).textContent = book.rating;
     });
+}
+
+function resetForm() {
+    bookTitle.value = null;
+    bookAuthor.value = null;
+    bookGenre.value = null;
+    bookPages.value = null;
+    bookRead.value = "no";
+    bookRating.value = "N/A";
 }
 
 //Main Function-----------------------------------------------------
 //------------------------------------------------------------------
 
 function update(form) {
-    addBookToLibrary(form.elements[0].value,form.elements[1].value, form.elements[2].value, form.elements[3].value, form.elements[4].value, form.elements[5].value);
-
+    addBookToLibrary(bookTitle.value,bookAuthor.value, bookGenre.value, bookPages.value, bookRead.value, bookRating.value);
     displayBooks(myLibrary);
+    resetForm();
 }

@@ -50,9 +50,6 @@ body {
     width: 75%;
 }
 
-fieldset {
-    border: none;
-}
 label, input, select, option, button {
     width: 90%;
     margin: 10px;

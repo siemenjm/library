@@ -16,33 +16,31 @@
       <div id="form-container">
         <P id="form-description">You have no books on your bookshelf. Click the button below to add one!</P>
         <form id="book-form">
-          <fieldset>
-            <legend>Enter Book Information: </legend>
-            <label>Title: </label><br>
-            <input type="text" name="title" placeholder="Enter title..."><br>
-            <label>Author: </label><br>
-            <input type="text" name="author" placeholder="Enter author..."><br>
-            <label>Genre: </label><br>
-            <input type="text" name="genre" placeholder="Enter genre..."><br>
-            <label>Total Pages: </label><br>
-            <input type="number" name="pages" placeholder="Enter pages..."><br>
-            <label>Have you read this book?</label><br>
-            <select>
-              <option value="no">No</option>
-              <option value="reading">Currently reading</option>
-              <option value="yes">Yes</option>
-            </select><br>
-            <label>What would you rate this book?</label><br>
-            <select>
-              <option value="N/A">N/A (haven't read or finished reading)</option>
-              <option value="1">1 - Why? Just Why?...</option>
-              <option value="2">2 - Could have been worse</option>
-              <option value="3">3 - It's aight</option>
-              <option value="4">4 - 8/10</option>
-              <option value="3">5 - So good I cried</option>
-            </select><br>
-            <button id="submit-btn" type="button">Add Book to Bookshelf</button>
-          </fieldset>
+          <legend>Enter Book Information: </legend>
+          <label>Title: </label><br>
+          <input type="text" name="title" id="title-id" placeholder="Enter title..."><br>
+          <label>Author: </label><br>
+          <input type="text" name="author" id="author-id" placeholder="Enter author..."><br>
+          <label>Genre: </label><br>
+          <input type="text" name="genre" id="genre-id" placeholder="Enter genre..."><br>
+          <label>Total Pages: </label><br>
+          <input type="number" name="pages" id="pages-id" placeholder="Enter pages..."><br>
+          <label>Have you read this book?</label><br>
+          <select id="read-id">
+            <option value="no">No</option>
+            <option value="reading">Currently reading</option>
+            <option value="yes">Yes</option>
+          </select><br>
+          <label>What would you rate this book?</label><br>
+          <select id="rating-id">
+            <option value="N/A">N/A (haven't read or finished reading)</option>
+            <option value="1">1 - Why? Just Why?...</option>
+            <option value="2">2 - Could have been worse</option>
+            <option value="3">3 - It's aight</option>
+            <option value="4">4 - 8/10</option>
+            <option value="3">5 - So good I cried</option>
+          </select><br>
+          <input type="button" name="submit" id="submit-button" value="Add Book to Bookshelf">
         </form>
       </div>
       <div id="table-container">
