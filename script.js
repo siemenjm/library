@@ -16,12 +16,6 @@ const submitButton = document.querySelector("#submit-button");
 //------------------------------------------------------------------
 
 submitButton.addEventListener("click", function() {
-    console.log(bookTitle.value);
-    console.log(bookAuthor.value);
-    console.log(bookGenre.value);
-    console.log(bookPages.value);
-    console.log(bookRead.value);
-    console.log(bookRating.value);
     update();
 });
 
@@ -55,12 +49,14 @@ function displayBooks(libraryArray) {
     }
     libraryArray.forEach(book => {
         let row = table.insertRow(-1);
+        row.setAttribute("id", table.rows.length - 1);
         row.insertCell(0).textContent = book.title;
         row.insertCell(1).textContent = book.author;
         row.insertCell(2).textContent = book.genre;
         row.insertCell(3).textContent = book.pages;
         row.insertCell(4).textContent = book.read;
         row.insertCell(5).textContent = book.rating;
+        row.insertCell(6).setAttribute("class", "last-column");   
     });
 }
 
@@ -73,11 +69,37 @@ function resetForm() {
     bookRating.value = "N/A";
 }
 
+function createRemovalButtons() {
+    const removalCells = document.querySelectorAll(".last-column");
+    
+    removalCells.forEach(cell => {
+        let removalButton = document.createElement("input");
+        removalButton.type = "button";
+        removalButton.name = "button";
+        removalButton.className = "removal-button";
+        cell.appendChild(removalButton);
+
+        let buttonRowId = cell.parentElement.id;
+    
+        removalButton.addEventListener("click", function() {
+            removeBook(buttonRowId);
+        });
+    })  
+}
+
+function removeBook(buttonRowId) {
+    myLibrary.splice(buttonRowId - 1, 1);
+    displayBooks(myLibrary);
+    createRemovalButtons();
+    console.table(myLibrary);
+}
+
 //Main Function-----------------------------------------------------
 //------------------------------------------------------------------
 
-function update(form) {
+function update() {
     addBookToLibrary(bookTitle.value,bookAuthor.value, bookGenre.value, bookPages.value, bookRead.value, bookRating.value);
     displayBooks(myLibrary);
+    createRemovalButtons();
     resetForm();
 }
