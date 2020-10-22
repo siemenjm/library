@@ -4,7 +4,6 @@
 let myLibrary = [];
 let bookTitle = document.querySelector("#title-id");
 let bookAuthor = document.querySelector("#author-id");
-let bookGenre = document.querySelector("#genre-id");
 let bookPages = document.querySelector("#pages-id");
 let bookRead = document.querySelector("#read-id");
 let bookRating = document.querySelector("#rating-id");
@@ -22,10 +21,9 @@ submitButton.addEventListener("click", function() {
 //Book Constructor--------------------------------------------------
 //------------------------------------------------------------------
 
-function Book(title, author, genre, pages, read, rating) {
+function Book(title, author, pages, read, rating) {
     this.title = title;
     this.author = author;
-    this.genre = genre;
     this.pages = pages;
     this.read = read;
     this.rating = rating;
@@ -37,8 +35,8 @@ function Book(title, author, genre, pages, read, rating) {
 //Helper Functions--------------------------------------------------
 //------------------------------------------------------------------
 
-function addBookToLibrary(title, author, genre, pages, read, rating = "N/A") {
-    let book = new Book(title, author, genre, pages, read, rating);
+function addBookToLibrary(title, author, pages, read, rating = "N/A") {
+    let book = new Book(title, author, pages, read, rating);
     
     myLibrary.push(book);
 }
@@ -55,7 +53,6 @@ function displayBooks(libraryArray) {
 
         let titleCell = document.createElement("td");
         let authorCell = document.createElement("td");
-        let genreCell = document.createElement("td");
         let pagesCell = document.createElement("td");
         let readCell = document.createElement("td");
         let ratingCell = document.createElement("td");
@@ -63,12 +60,10 @@ function displayBooks(libraryArray) {
 
         titleCell.textContent = book.title;
         authorCell.textContent = book.author;
-        genreCell.textContent = book.genre;
         pagesCell.textContent = book.pages;
 
         row.appendChild(titleCell);
         row.appendChild(authorCell);
-        row.appendChild(genreCell);
         row.appendChild(pagesCell);
         row.appendChild(readCell);
         row.appendChild(ratingCell);
@@ -85,7 +80,6 @@ function displayBooks(libraryArray) {
 function resetForm() {
     bookTitle.value = null;
     bookAuthor.value = null;
-    bookGenre.value = null;
     bookPages.value = null;
     bookRead.value = "no";
     bookRating.value = "N/A";
@@ -96,7 +90,6 @@ function createRemovalButton(cell) {
     removalButton.setAttribute("type", "button");
     removalButton.setAttribute("name", "remove");
     removalButton.setAttribute("class", "removal-button");
-    removalButton.setAttribute("value", "Remove Book");
     cell.appendChild(removalButton);
 
     let rowId = cell.parentElement.id;
@@ -140,7 +133,7 @@ function createRatingDropdown(cell) {
     let defaultRating = myLibrary[rowId].rating;
     
     let ratingDropdown = document.createElement("select");
-    ratingDropdown.setAttribute("id", "table-rating");
+    ratingDropdown.setAttribute("class", "table-rating");
 
     for (i = 0; i <= 5; i++) {
         let rating = document.createElement("option");
@@ -194,7 +187,7 @@ function changeRatingDropdown(ratingDropdown, rowId) {
 //------------------------------------------------------------------
 
 function update() {
-    addBookToLibrary(bookTitle.value,bookAuthor.value, bookGenre.value, bookPages.value, bookRead.value, bookRating.value);
+    addBookToLibrary(bookTitle.value,bookAuthor.value, bookPages.value, bookRead.value, bookRating.value);
     displayBooks(myLibrary);
     resetForm();
 }

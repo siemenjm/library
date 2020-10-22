@@ -69,3 +69,25 @@ table {
 tr {
     text-align: center;
 }
+
+th {
+    font-size: 25px;
+}
+
+td {
+    font-size: 18px;
+}
+
+.table-rating {
+    width: 60px;
+    height: 25px;
+    font-size: 18px;
+}
+
+.removal-button {
+    background-image: url(/pics/bin.png);
+    background-size: contain;
+    background-color: white;
+    width: 25px;
+    height: 25px;
+}
