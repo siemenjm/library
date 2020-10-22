@@ -9,7 +9,7 @@ let bookPages = document.querySelector("#pages-id");
 let bookRead = document.querySelector("#read-id");
 let bookRating = document.querySelector("#rating-id");
 
-const tableContainer = document.querySelector("#table-container");
+const table = document.querySelector("#book-table");
 const submitButton = document.querySelector("#submit-button");
 
 //Event Listeners---------------------------------------------------
@@ -44,22 +44,42 @@ function addBookToLibrary(title, author, genre, pages, read, rating = "N/A") {
 }
 
 function displayBooks(libraryArray) {
-    let table = document.createElement("table");
-    let tableColumns = 7;
-
-    for (i = 0; i <= libraryArray.length; i++) {
-        let row = document.createElement("tr");
-
-        for (j = 0; j <= tableColumns; j++) {
-            let cell = document.createElement("td");
-            cell.setAttribute("id", i+", "+j);
-            row.appendChild(cell);
-        }
-
-        table.appendChild(row);
+    while (table.rows.length > 1) {
+        table.deleteRow(-1);
     }
 
-    tableContainer.appendChild(table);
+
+    libraryArray.forEach(function(book, index, array){
+        let row = document.createElement("tr");
+        row.setAttribute("id", index);
+
+        let titleCell = document.createElement("td");
+        let authorCell = document.createElement("td");
+        let genreCell = document.createElement("td");
+        let pagesCell = document.createElement("td");
+        let readCell = document.createElement("td");
+        let ratingCell = document.createElement("td");
+        let removalCell = document.createElement("td");
+
+        titleCell.textContent = book.title;
+        authorCell.textContent = book.author;
+        genreCell.textContent = book.genre;
+        pagesCell.textContent = book.pages;
+        readCell.textContent = book.read;
+        ratingCell.textContent = book.rating;
+
+        row.appendChild(titleCell);
+        row.appendChild(authorCell);
+        row.appendChild(genreCell);
+        row.appendChild(pagesCell);
+        row.appendChild(readCell);
+        row.appendChild(ratingCell);
+        row.appendChild(removalCell);
+
+        table.appendChild(row);
+
+        createRemovalButton(removalCell);
+    });
 }
 
 function resetForm() {
@@ -71,45 +91,23 @@ function resetForm() {
     bookRating.value = "N/A";
 }
 
-function createRemovalButtons() {
-    const removalCells = document.querySelectorAll(".last-column");
-    
-    removalCells.forEach(cell => {
-        let removalButton = document.createElement("input");
-        removalButton.type = "button";
-        removalButton.name = "button";
-        removalButton.className = "removal-button";
-        cell.appendChild(removalButton);
+function createRemovalButton(cell) {
+    let removalButton = document.createElement("input");
+    removalButton.setAttribute("type", "button");
+    removalButton.setAttribute("name", "remove");
+    removalButton.setAttribute("class", "removal-button");
+    removalButton.setAttribute("value", "Remove Book");
+    cell.appendChild(removalButton);
 
-        let buttonRowId = cell.parentElement.id;
-    
-        removalButton.addEventListener("click", function() {
-            removeBook(buttonRowId);
-        });
-    })  
+    let rowId = cell.parentElement.id;
+    removalButton.addEventListener("click", function() {
+        removeBook(rowId);
+    })
 }
 
-function removeBook(buttonRowId) {
-    myLibrary.splice(buttonRowId - 1, 1);
+function removeBook(rowId) {
+    myLibrary.splice(rowId, 1);
     displayBooks(myLibrary);
-    createReadToggles();
-    createRemovalButtons();
-    console.table(myLibrary);
-}
-
-function createReadToggles() {
-    let readToggle = document.createElement("input");
-    readToggle.type = "checkbox";
-    readToggle.name = "read";
-    readToggle.className = "read-toggle";
-    readToggle.value = "Read";
-    cell.appendChild(readToggle);
-
-    let readLabel = document.createElement("label");
-    readLabel.for = "read";
-    readLabel.textContent = "Read";
-    cell.appendChild(readLabel);
-    
 }
 
 //Main Function-----------------------------------------------------
@@ -118,7 +116,5 @@ function createReadToggles() {
 function update() {
     addBookToLibrary(bookTitle.value,bookAuthor.value, bookGenre.value, bookPages.value, bookRead.value, bookRating.value);
     displayBooks(myLibrary);
-    createReadToggles();
-    createRemovalButtons();
     resetForm();
 }
