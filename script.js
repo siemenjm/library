@@ -65,7 +65,6 @@ function displayBooks(libraryArray) {
         authorCell.textContent = book.author;
         genreCell.textContent = book.genre;
         pagesCell.textContent = book.pages;
-        ratingCell.textContent = book.rating;
 
         row.appendChild(titleCell);
         row.appendChild(authorCell);
@@ -77,8 +76,9 @@ function displayBooks(libraryArray) {
 
         table.appendChild(row);
 
-        createRemovalButton(removalCell);
         createReadCheckbox(readCell);
+        createRatingDropdown(ratingCell);
+        createRemovalButton(removalCell);
     });
 }
 
@@ -132,7 +132,62 @@ function createReadCheckbox(cell) {
         } else {
             myLibrary[rowId].read = "no";
         }
-    })
+    });
+}
+
+function createRatingDropdown(cell) {
+    let rowId = cell.parentElement.id;
+    let defaultRating = myLibrary[rowId].rating;
+    
+    let ratingDropdown = document.createElement("select");
+    ratingDropdown.setAttribute("id", "table-rating");
+
+    for (i = 0; i <= 5; i++) {
+        let rating = document.createElement("option");
+        if (i === 0) {
+            rating.setAttribute("value", "N/A");
+            rating.textContent = "N/A";
+            
+            if (defaultRating === "N/A") {
+                rating.selected = true;
+            } else {
+                rating.selected = false;
+            }
+        } else {
+            rating.setAttribute("value", i);
+            rating.textContent = i;
+
+            if (defaultRating == i) {
+                rating.selected = true;
+            } else {
+                rating.selected = false;
+            }
+        }
+
+        ratingDropdown.appendChild(rating);
+    }
+
+    cell.appendChild(ratingDropdown);
+    
+    ratingDropdown.addEventListener("change", function() {
+        changeRatingDropdown(ratingDropdown, rowId);
+    });
+}
+
+function changeRatingDropdown(ratingDropdown, rowId) {
+    let ratingList = ratingDropdown.childNodes;
+    let newRating;
+    ratingList.forEach(function(rating, index, array) {
+        if (rating.selected === true) {
+            newRating = index;
+
+            if (index === 0) {
+                newRating = "N/A";
+            }
+        }
+    });
+
+    myLibrary[rowId].rating = newRating;
 }
 
 //Main Function-----------------------------------------------------
