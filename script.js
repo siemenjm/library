@@ -65,7 +65,6 @@ function displayBooks(libraryArray) {
         authorCell.textContent = book.author;
         genreCell.textContent = book.genre;
         pagesCell.textContent = book.pages;
-        readCell.textContent = book.read;
         ratingCell.textContent = book.rating;
 
         row.appendChild(titleCell);
@@ -79,6 +78,7 @@ function displayBooks(libraryArray) {
         table.appendChild(row);
 
         createRemovalButton(removalCell);
+        createReadCheckbox(readCell);
     });
 }
 
@@ -108,6 +108,31 @@ function createRemovalButton(cell) {
 function removeBook(rowId) {
     myLibrary.splice(rowId, 1);
     displayBooks(myLibrary);
+}
+
+function createReadCheckbox(cell) {
+    let rowId = cell.parentElement.id;
+
+    let readCheckbox = document.createElement("input");
+    readCheckbox.setAttribute("type", "checkbox");
+    readCheckbox.setAttribute("name", "read");
+    readCheckbox.setAttribute("value", "Read");
+
+    if (myLibrary[rowId].read === "yes") {
+        readCheckbox.checked = true;
+    } else {
+        readCheckbox.checked = false;
+    }
+
+    cell.appendChild(readCheckbox);
+
+    readCheckbox.addEventListener("click", function() {
+        if (readCheckbox.checked === true) {
+            myLibrary[rowId].read = "yes";
+        } else {
+            myLibrary[rowId].read = "no";
+        }
+    })
 }
 
 //Main Function-----------------------------------------------------
