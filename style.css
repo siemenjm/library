@@ -57,10 +57,6 @@ label, input, select, option, button {
     font-size: 20px;
 }
 
-#table-container {
-    border: coral dotted 2px;
-}
-
 table {
     border: orange solid 5px;
     width: 100%;
